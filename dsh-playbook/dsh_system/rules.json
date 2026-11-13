@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "note": "Format→recipe map used by the original dsh dispatcher. WorkBuddy does not run dsh_dispatch or agent-autoloop. Use the recipes as quality/output contracts. Original local script paths and usage-brake file locations have been removed.",
+  "recipes": {
+    "image_text": {
+      "profile": "headless",
+      "preferred_tools": [
+        "html_css_cards",
+        "dsh-media-desk",
+        "dsh-handraw-style",
+        "dsh-reel-studio"
+      ],
+      "phase1_available": [
+        "html_css_cards",
+        "grok_gen_protocol"
+      ],
+      "outputs": [
+        "output/",
+        "asset_manifest.json",
+        "self_check.md",
+        "run.jsonl"
+      ],
+      "skill": "dsh-executor"
+    },
+    "short_video": {
+      "profile": "headless",
+      "preferred_tools": [
+        "dsh-art-workshop",
+        "video-talkcraft",
+        "HyperFrames",
+        "Motion Prompt",
+        "dsh-motion"
+      ],
+      "phase1_available": [
+        "script_storyboard",
+        "html_gsap_source",
+        "grok_gen_protocol"
+      ],
+      "license_gate": "commercial_use true → exclude anything2explainer",
+      "outputs": [
+        "output/",
+        "asset_manifest.json",
+        "self_check.md",
+        "run.jsonl"
+      ],
+      "skill": "dsh-executor"
+    },
+    "long_video": {
+      "profile": "headless",
+      "preferred_tools": [
+        "dsh-art-workshop",
+        "anything2explainer",
+        "video-talkcraft",
+        "HyperFrames"
+      ],
+      "phase1_available": [
+        "script_storyboard",
+        "html_gsap_source",
+        "grok_gen_protocol"
+      ],
+      "license_gate": "commercial_use true → exclude anything2explainer",
+      "outputs": [
+        "output/",
+        "asset_manifest.json",
+        "self_check.md",
+        "run.jsonl"
+      ],
+      "skill": "dsh-executor"
+    },
+    "webpage": {
+      "profile": "headless",
+      "preferred_tools": [
+        "awwwards-mcp",
+        "Lazyweb",
+        "Mobbin",
+        "landing-page-design",
+        "claude-ui-skills"
+      ],
+      "phase1_available": [
+        "reference_sources.md",
+        "design_decisions.md",
+        "static_html"
+      ],
+      "outputs": [
+        "output/",
+        "reference_sources.md",
+        "design_decisions.md",
+        "asset_manifest.json",
+        "self_check.md",
+        "run.jsonl"
+      ],
+      "skill": "dsh-executor"
+    }
+  },
+  "workspace_root": "<WORK_DIR>",
+  "publish": "Never publish from this pack. Dispatcher never publishes; WorkBuddy must not publish either."
+}

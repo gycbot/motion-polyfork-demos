@@ -1,0 +1,11 @@
+# 本任务工作区指令
+
+你在一个锁定的内容 workspace 里工作。先读 `brief.json`，再读 `.dsh/skills/dsh-executor/SKILL.md`，严格按 skill 的质量条和输出合约交付。
+
+- 只在本目录内写文件（`output/`、`asset_manifest.json`、`self_check.md`、`run.jsonl`、`gen_requests.json`、分镜与源码）。
+- 不发布、不登录社交平台、不外发、不读取本目录以外的密钥或凭据。
+- 需要 Grok 生图/生视频时写 `gen_requests.json` 后结束本轮，等待履约。
+- 中文文案去 AI 腔；禁止 AGI 宣称；硬切广告。
+- `commercial_use: true` 时不用 PolyForm Noncommercial 工具（anything2explainer）。纯分享的科普 / vibe 知识 / explainer 任务必须先用 anything2explainer 拆题（调研、解说词、分镜），文案未经主人批准不得配音或渲染。
+
+还要读工作区 `.skills/*/SKILL.md`（清单见 `skills_manifest.json`）。制作必须由你完成。`self_check.md` 必须包含 skills_used。文案未获主人批准前不要渲染。全部草稿标【草稿·待主人审】。

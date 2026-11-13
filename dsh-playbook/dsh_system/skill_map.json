@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "skill_root": "skills",
+  "always": [
+    "skill-first-task",
+    "user-taste-transfer",
+    "de-ai-zh"
+  ],
+  "executor": {
+    "name": "dsh-executor",
+    "source": "dsh_system/skills/dsh-executor/SKILL.md",
+    "mount": ".dsh/skills/dsh-executor/SKILL.md"
+  },
+  "by_format": {
+    "short_video": [
+      "vibe-oneshot-remotion-brief",
+      "motion-house-style",
+      "kinetic-typefx-sell-short",
+      "viral-copy-zh",
+      "narration-av-sync",
+      "oil-cover-agent",
+      "preview-deliver-split",
+      "scout-video-repurpose"
+    ],
+    "long_video": [
+      "motion-house-style",
+      "narration-av-sync",
+      "viral-copy-zh",
+      "concept-diagram-tutorial-pack-2",
+      "video-storyboard-dsh",
+      "preview-deliver-split",
+      "oil-cover-agent"
+    ],
+    "image_text": [
+      "viral-copy-zh",
+      "oil-cover-agent"
+    ],
+    "webpage": [
+      "surface-web-craft-kit",
+      "viral-copy-zh"
+    ]
+  },
+  "by_tag": {
+    "vibe_video": [
+      "anything2explainer",
+      "vibe-oneshot-remotion-brief",
+      "motion-house-style",
+      "kinetic-typefx-sell-short",
+      "surface-web-craft-kit"
+    ],
+    "grokbot_demo": [
+      "grokbot-chat-demo-sop"
+    ],
+    "xhs_image_text": [
+      "viral-copy-zh",
+      "oil-cover-agent",
+      "de-ai-zh"
+    ],
+    "repost_translation": [
+      "viral-copy-zh",
+      "de-ai-zh",
+      "x-bookmark-drygoods-video",
+      "x-bookmark-learn-triad",
+      "scout-video-repurpose"
+    ],
+    "explainer_tutorial": [
+      "anything2explainer",
+      "concept-diagram-tutorial-pack-2",
+      "narration-av-sync",
+      "motion-house-style",
+      "video-storyboard-dsh"
+    ],
+    "cover": [
+      "oil-cover-agent"
+    ],
+    "remotion_render": [
+      "remotion-best-practices",
+      "remotion-markup",
+      "remotion-captions",
+      "remotion-render"
+    ],
+    "webcraft": [
+      "surface-web-craft-kit",
+      "motion-house-style",
+      "gsap-core",
+      "gsap-scrolltrigger",
+      "gsap-timeline",
+      "gsap-plugins",
+      "gsap-performance",
+      "gsap-utils"
+    ]
+  },
+  "auto_tags": [
+    {
+      "if_topic_matches": "Grok Bot|GrokBot|grok bot",
+      "tag": "grokbot_demo"
+    },
+    {
+      "if_topic_matches": "vibe",
+      "tag": "vibe_video"
+    },
+    {
+      "if_topic_matches": "翻译|二创|转发|bookmark",
+      "tag": "repost_translation"
+    },
+    {
+      "if_topic_matches": "教程|讲解|关系图|概念图|科普|explainer|知识视频|知识大赏",
+      "tag": "explainer_tutorial"
+    }
+  ],
+  "optional_roots": [
+    "skills",
+    "<OPTIONAL_PLUGIN_ROOT>  # GSAP / aesthetic skills — not bundled; install separately if needed",
+    "<OPTIONAL_TOOLKIT_ROOT>  # anything2explainer full toolkit — NOT bundled; PolyForm Noncommercial; clone upstream if needed"
+  ],
+  "inject_policy": "Copy SKILL.md and small sibling files (steps.yaml) into workspace .skills/<name>/. For anything2explainer, also attach toolkit_root and copy reference/*.md; do not copy template, node_modules, renders, or media. Skip anything2explainer when commercial_use is true. Missing skills are listed in skills_manifest.json as missing, never invented. dsh must record skills_used in self_check.md. On vibe/explainer jobs, anything2explainer is the first breakdown skill.",
+  "toolkits": {
+    "anything2explainer": [
+      "<OPTIONAL_TOOLKIT_ROOT>/anything2explainer  # DO NOT use commercially without author authorization. Upstream: https://github.com/Vincentwei1021/anything2explainer. This pack only includes the team gate SKILL.md, not the toolkit source."
+    ]
+  },
+  "note": "Paths in this file are relative to the playbook pack root. WorkBuddy does not need dsh_dispatch; open this repo and follow TASK_1MIN_HOOK.md. anything2explainer toolkit is PolyForm Noncommercial — see LICENSE_NOTES.md. For the 1-min hook TASK, do NOT use anything2explainer (it is not a from-scratch explainer; it is a recut of existing footage)."
+}

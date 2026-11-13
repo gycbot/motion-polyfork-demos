@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/dsh_system/brief.schema.json",
+  "title": "ContentBrief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "topic",
+    "angle",
+    "platform",
+    "format",
+    "must_include",
+    "forbidden",
+    "acceptance_anchors",
+    "commercial_use"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,80}$",
+      "description": "Optional; dispatcher generates one if omitted."
+    },
+    "topic": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 400
+    },
+    "angle": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 800
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "douyin",
+        "xiaohongshu",
+        "x",
+        "wechat",
+        "bilibili"
+      ]
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "image_text",
+        "short_video",
+        "long_video",
+        "webpage"
+      ]
+    },
+    "target_duration": {
+      "type": "string",
+      "description": "e.g. 60s, 3min, 3cards. Required for video formats.",
+      "maxLength": 40
+    },
+    "must_include": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_anchors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "commercial_use": {
+      "type": "boolean"
+    },
+    "workspace": {
+      "type": "string",
+      "description": "Optional override. Dispatcher sets this if omitted."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "skill_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional tags from skill_map.json (e.g. vibe_video, grokbot_demo). Dispatcher also infers tags."
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional extra skill names. Dispatcher fills the full list on seed."
+    },
+    "skill_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Workspace or team paths to assets dsh should open itself."
+    },
+    "standing_pointers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Paths to standing rules. dsh must read them."
+    },
+    "stop_point": {
+      "type": "string",
+      "maxLength": 800
+    },
+    "timeout_s": {
+      "type": "integer",
+      "minimum": 60,
+      "description": "Per-turn wall clock in seconds. Default 2700 (45min). A still-producing turn is not killed at this wall."
+    },
+    "max_steps": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Soft step cap (default 80). Never kills a turn that is still producing."
+    },
+    "hard_timeout_s": {
+      "type": "integer",
+      "minimum": 60,
+      "description": "Idle ceiling in seconds (default 5400). Only applied after the turn has gone idle."
+    },
+    "wait_for_grok_gen": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, dispatch pauses as waiting_grok_gen until gen_results.json exists. Default false: gen_requests.json is a list only, and the task goes to draft_for_review."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "format": {
+            "enum": [
+              "short_video",
+              "long_video"
+            ]
+          }
+        },
+        "required": [
+          "format"
+        ]
+      },
+      "then": {
+        "required": [
+          "target_duration"
+        ]
+      }
+    }
+  ]
+}

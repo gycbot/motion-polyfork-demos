@@ -1,0 +1,115 @@
+# motion-house-style · 机读步骤（t2496u）
+# 叠 STANDING_MOTION_HOUSE_STYLE_T2496 + STANDING_WF_STEPS_GATE_T2491
+skill_id: motion-house-style
+version: 1
+standing: STANDING_MOTION_HOUSE_STYLE_T2496
+sample_not_ship: true
+verified: true
+verified_at: "2026-11-05T17:47+08:00"
+verified_run: "team/runs/t2496-motion-house-smoke"
+verified_by: "wf_check.py PASS missing=0 · 技术落地"
+verified_note: "假 brief+shotlist 闸门冒烟（非实渲）；SAMPLE≠授发；真动效片仍走本闸。本 verified 只证明规则冒烟，不能证明新片观感已达对标标准。"
+run_layout: "team/runs/<task_id>/"
+state_file: STATE.md
+shipped_forbidden_unless: "wf_check.py exit 0 AND all required steps done AND human gates cleared or waived AND verified:true"
+# t103u L1: full-length films should complete a producer self-check (keyframes / short local motion; out/proof.mp4 optional) before render; this is not a separate human review round. See artifacts/2026-11-06-t103u-L1-proof15s-gate.md
+proof_15s_required_for_full: true  # policy; in-production proof, not a post-film critic; step merge pending to avoid breaking verified smoke
+
+steps:
+  - id: brief
+    title: 需求与参考
+    inputs: []
+    outputs: [brief.md]
+    done_when:
+      - "brief.md exists"
+      - "at least one reference image or video path recorded"
+    human_gate: false
+    artifacts: [brief.md]
+
+  - id: beats
+    title: 节拍或 VO 时间轴
+    inputs: [brief.md]
+    outputs: [beats.json]
+    done_when:
+      - "beats.json exists OR VO timeline documented for narration-led films"
+    human_gate: false
+    artifacts: [beats.json]
+
+  - id: shotlist
+    title: 分镜（2–4s 新元素）
+    inputs: [brief.md, beats.json]
+    outputs: [shotlist.md]
+    done_when:
+      - "shotlist.md exists"
+      - "every 2–4s window has a named new on-screen change"
+      - "mute-readable copy listed per beat"
+    human_gate: false
+    artifacts: [shotlist.md]
+
+  - id: approved
+    title: 用户批准分镜
+    inputs: [shotlist.md]
+    outputs: [APPROVED]
+    done_when:
+      - "APPROVED file exists after user yes"
+    human_gate: true
+    artifacts: [APPROVED]
+
+  - id: build
+    title: Remotion 组合可渲
+    inputs: [shotlist.md, APPROVED]
+    outputs: [src/]
+    done_when:
+      - "Remotion composition builds without Date/Math.random/CSS transition in render path"
+      - "fonts via staticFile or local files only"
+    human_gate: false
+    artifacts: ["src/"]
+
+  - id: stills
+    title: 关键帧对标自检（达标才开渲）
+    inputs: [src/, beats.json]
+    outputs: [stills/, review_log.md, PASSED]
+    done_when:
+      - "one still per beat or key change"
+      - "no overlapping morph text; phone-scale readability noted"
+      - "review_log.md has 6 scores against the brief bar, all >=8"
+      - "PASSED only when the bar is met; motion or transition issues need a short local clip, not stills alone"
+    human_gate: false
+    artifacts: ["stills/", review_log.md, PASSED]
+
+  - id: render
+    title: 完整渲染
+    inputs: [src/, stills/, PASSED]
+    outputs: [out/final.mp4]
+    done_when:
+      - "PASSED from stills self-check already exists"
+      - "out/final.mp4 exists"
+      - "written via tmp then rename"
+      - "final is not a placeholder, black frame, or error plate"
+    human_gate: false
+    artifacts: [out/final.mp4]
+
+  - id: qa
+    title: 成片技术证据三图
+    inputs: [out/final.mp4]
+    outputs: [out/contact.png, out/phone.png]
+    done_when:
+      - "out/contact.png exists"
+      - "out/phone.png exists (~360w readability sheet)"
+      - "out/seam.png if looping"
+      - "these sheets are producer technical evidence, not a new review round"
+    human_gate: false
+    artifacts: [out/contact.png, out/phone.png]
+
+  - id: deliver
+    title: 只交一次达标成品
+    inputs: [out/final.mp4, PASSED, STATE.md]
+    outputs: [HANDOFF.md, DELIVERED]
+    done_when:
+      - "HANDOFF.md has path + md5 + SAMPLE≠授发 + refs/skill/proof"
+      - "STATE.md all required steps done"
+      - "wf_check.py exit 0"
+      - "one delivery that already met the bar; no post-film critic loop"
+    human_gate: true
+    artifacts: [HANDOFF.md, DELIVERED, STATE.md]
+    notes: "禁止 shipped=true 除非 human_gate 通过且 wf_check=0 且 steps.yaml verified:true。approved 仍是选题/分镜锁；deliver 是一次交片闸，不是审核轮。已删除全片后 critic 步骤。"

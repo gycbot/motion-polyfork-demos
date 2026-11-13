@@ -1,0 +1,47 @@
+{
+  "task_id": "prod-20261113-yt-repost-trial",
+  "topic": "YouTube 高价值科技片中文翻译搬运试片：Tech With Tim《Claude Fable 5.2 is INSANE》",
+  "angle": "把 Tech With Tim 2026-11-12 的 Fable 5.2 实测（一条提示词过夜做出三个成品，并交代 token 花费与是否值得用）做成 B 站 16:9 完整中文翻译配音稿。本示例记录的是已过审、已成片的那一轮任务的前置文案闸形态（早期 brief）；最终已交付 8:48 成片。对照任务请用 TASK_1MIN_HOOK.md，不要重新做这条长片。",
+  "platform": "bilibili",
+  "format": "long_video",
+  "target_duration": "10min30s",
+  "skill_tags": [
+    "repost_translation"
+  ],
+  "assets": [
+    "<SOURCE_DIR>/source/original.mp4  # YouTube 原片，本包不收录",
+    "<SOURCE_DIR>/source/SOURCE.md",
+    "<LOCAL_VOICE_REF>/grokko_sweet  # 音色参考，本包不收录 wav"
+  ],
+  "standing_pointers": [
+    "standing/STANDING_YT_HIGHVALUE_REPOST_T2788.md",
+    "standing/STANDING_DAILY_HQ_REPOST_T2809.md",
+    "standing/STANDING_NARRATION_AV_SYNC_T188.md",
+    "skills/narration-av-sync/SKILL.md",
+    "skills/de-ai-zh/SKILL.md"
+  ],
+  "stop_point": "历史上：文案审过前禁止 TTS、禁止渲染、禁止发布。最终状态：已成片、final_for_owner、未发布。",
+  "must_include": [
+    "简介必须含 https://www.youtube.com/watch?v=xKlUf-dw_Lw 与「本视频为 AI 技术搬运翻译」",
+    "去掉原片广告、求订阅、硬广；硬切，不淡入淡出",
+    "口播第三人称；音色 grokko_sweet；原片原声必须削尽，不是 duck",
+    "只做 B 站 16:9；抖音 9:16 线 HOLD",
+    "数字标「原作者说法」，不写成我方实测或官方数字；官方事实只用 https://www.anthropic.com/claude-fable-and-mythos-5-2 已核要点"
+  ],
+  "forbidden": [
+    "发布到任何平台、登录社交平台",
+    "制作或交付 9:16 竖屏稿、抖音精剪",
+    "冒充原作者或官方；简介缺少原 YouTube 链接或「本视频为 AI 技术搬运翻译」",
+    "把原声压低垫底或残留原片人声",
+    "编造播放量、跑分、官方未核能力或我方未做的实测",
+    "收益/涨粉承诺，课程销售，硬广",
+    "AI 腔套话；把 AGI 或人类水平意识写成结论"
+  ],
+  "acceptance_anchors": [
+    "16:9 1080p 成片（本轮最终为 8:48.2、60fps），口播第三人称 grokko_sweet，原声已剥净",
+    "简介含原链与「本视频为 AI 技术搬运翻译」",
+    "未发布、无 9:16"
+  ],
+  "commercial_use": false,
+  "notes": "这是历史示例 brief，路径已改为占位符。成片母带不进本仓库。请把已过审成片单独拷到本地后再跑 TASK_1MIN_HOOK。"
+}

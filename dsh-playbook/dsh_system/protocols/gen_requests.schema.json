@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GrokGenRequests",
+  "type": "object",
+  "required": ["task_id", "requests"],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": { "type": "string" },
+    "created_at": { "type": "string" },
+    "requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "prompt", "purpose"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,60}$" },
+          "kind": { "type": "string", "enum": ["image", "video"] },
+          "prompt": { "type": "string", "minLength": 8 },
+          "ref_images": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Workspace-relative paths already in this workspace."
+          },
+          "aspect": { "type": "string", "description": "e.g. 3:4, 16:9, 1:1, 9:16" },
+          "duration": { "type": "string", "description": "For video, e.g. 4s, 8s" },
+          "purpose": { "type": "string" }
+        }
+      }
+    }
+  }
+}

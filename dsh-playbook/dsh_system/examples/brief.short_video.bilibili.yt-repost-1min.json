@@ -1,0 +1,58 @@
+{
+  "task_id": "prod-20261114-yt-repost-1min-hook",
+  "topic": "从已过审的 Fable 5.2 中文搬运成片中，截取中间关键部分，做成约 1 分钟快节奏抓眼精剪",
+  "angle": "主人 t2923u 嫌 8 分 48 秒成片太长，要求截取中间关键部分做成约 1 分钟快节奏抓眼视频。素材只用已锁定的 16:9 成片，不要重下原片、不要另起长稿。画幅仍为 B 站 16:9，不做竖屏/抖音。优先复用已锁定的第三人称 grokko_sweet 口播片段做硬切+加速节奏，不要写一整篇新口播。SAMPLE，不发布。",
+  "platform": "bilibili",
+  "format": "short_video",
+  "target_duration": "60s",
+  "skill_tags": [
+    "repost_translation",
+    "cover"
+  ],
+  "assets": [
+    "<SOURCE_DIR>/final_bilibili_16x9.mp4  # 必须由操作者单独拷入，见 SOURCE_MANIFEST.md 与 source/README.md",
+    "<SOURCE_DIR>/subtitles.zh.srt  # 可选，若操作者同时拷了配套字幕",
+    "<SOURCE_DIR>/script.md  # 可选",
+    "<SOURCE_DIR>/description.md  # 可选"
+  ],
+  "standing_pointers": [
+    "standing/STANDING_YT_HIGHVALUE_REPOST_T2788.md",
+    "standing/STANDING_DAILY_HQ_REPOST_T2809.md",
+    "standing/STANDING_NARRATION_AV_SYNC_T188.md",
+    "standing/STANDING_DRYGOODS_HOOK_FIRST_T1589.md",
+    "TASK_1MIN_HOOK.md"
+  ],
+  "stop_point": "交付约 60 秒 16:9 精剪成片、对齐字幕、真实帧封面、self_check 后结束。状态 final_for_owner。不发布、不登录平台。",
+  "must_include": [
+    "只从已过审成片 final_bilibili_16x9.mp4（md5 18ba7833af875e7e1cadd0530cf92457，8:48.2，1920×1080@60）精剪，不要重新下载 YouTube，不要用未切广告的原片",
+    "时长约 60 秒（可 55–70 秒），快节奏、抓眼：截取中间关键部分，优先三个过夜成品的亮相/结果，以及花费/值不值得的关键数字；不要从头到尾缩成迷你版，不要片头片尾注水",
+    "画幅 16:9 1920×1080，优先 60fps；不做 9:16、不给抖音",
+    "口播保持第三人称（Tim / Fable，不要用「我」）；优先复用已锁定成片里的 grokko_sweet 片段硬切，不要为凑时长 atempo 整段拉声；若必须补很短的连接句，仍用 grokko_sweet 配方且不得改已锁事实",
+    "原片英文原声必须继续保持完全剥离，不是 duck；可薄叠无歌词 BGM，不得压过人声",
+    "中文字幕与精剪口播对齐；简介仍含 https://www.youtube.com/watch?v=xKlUf-dw_Lw 与「本视频为 AI 技术搬运翻译」",
+    "封面从本条精剪的真实帧提取，写取帧时码",
+    "self_check.md 含 skills_used、成片 md5、时长、fps、分辨率、音轨说明（原声已剥净、VO 来源）、字幕路径、封面取帧时码、用了成片哪些时码段",
+    "状态写成 final_for_owner；SAMPLE ≠ 发布"
+  ],
+  "forbidden": [
+    "发布到任何平台、登录社交平台、花钱、打印或泄露密钥",
+    "制作或交付 9:16 竖屏 / 抖音稿（该翻译精剪转抖音线仍 HOLD）",
+    "重新下载 YouTube 或使用未去掉广告/CTA 的原片",
+    "第一人称口播（「我测试」「我睡了一觉」等会像配音者自己测）",
+    "把原声 duck 垫底或残留英文人声",
+    "用 atempo / 改语速把 8 分 48 秒整段压成 1 分钟",
+    "编造未在成片中出现的花费、能力或官方数字",
+    "收益承诺、课程销售、硬广、会员导流"
+  ],
+  "acceptance_anchors": [
+    "output/ 下有约 60 秒（55–70s）的 16:9 1080p 精剪 mp4，优先 60fps",
+    "内容是中间关键部分的快节奏抓眼剪辑，不是整片缩放",
+    "音轨无原片原声，口播为第三人称 grokko_sweet",
+    "有对齐的中文字幕和从本片真实帧取的封面",
+    "简介或 description 含原 YouTube 链接与「本视频为 AI 技术搬运翻译」",
+    "self_check 写清所用时码段、md5、时长、fps、音轨；未发布",
+    "没有 9:16 交付"
+  ],
+  "commercial_use": false,
+  "notes": "对照任务正文见仓库根目录 TASK_1MIN_HOOK.md。工作目录建议为运行时自建的 <WORK_DIR>。源片必须由操作者按 SOURCE_MANIFEST.md 单独拷入 source/。不发布。"
+}

@@ -1,0 +1,45 @@
+# Media — source film and renders must never enter this public repo
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.wav
+*.mp3
+*.aac
+*.m4a
+*.flac
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+!docs/**/*.png
+
+# Secrets and local env
+.secrets/
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.cookie
+cookies.txt
+**/credentials*
+auth.json
+
+# Work product (local runs)
+task/output/
+task/work/
+source/*.mp4
+source/*.srt
+source/*.ass
+source/*.md
+!source/README.md
+
+# OS / editor
+.DS_Store
+__pycache__/
+*.pyc
+.idea/
+.vscode/

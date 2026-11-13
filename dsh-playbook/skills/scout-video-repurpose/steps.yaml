@@ -1,0 +1,85 @@
+# scout-video-repurpose · 机读步骤（t2564u / t2565u）
+# 叠 STANDING_SCOUT_VIDEO_REUSE_POOL_T2564 + STANDING_WF_STEPS_GATE_T2491
+skill_id: scout-video-repurpose
+version: 1
+standing: STANDING_SCOUT_VIDEO_REUSE_POOL_T2564
+sample_not_ship: true
+verified: true
+verified_at: "2026-11-06T14:35+08:00"
+verified_run: "team/runs/t2564-scout-repurpose-smoke"
+verified_by: "wf_check.py PASS missing=0 · 首包 threeui-t159u 实测"
+verified_note: "三端样板包冒烟（非公开授发）；真发帖仍走各平台 PREPOST + 发前存活回查"
+run_layout: "team/runs/<task_id>/"
+state_file: STATE.md
+shipped_forbidden_unless: "wf_check.py exit 0 AND all required steps done AND human gates cleared or waived AND verified:true"
+
+steps:
+  - id: inventory
+    title: 盘点源片并标 IP/废片边界
+    inputs: []
+    outputs: [inventory.md]
+    done_when:
+      - "inventory.md lists source path, ffprobe specs, READY vs HOLD"
+      - "Grokko / disclaimer risks noted"
+    human_gate: false
+    artifacts: [inventory.md]
+
+  - id: index_register
+    title: 登记共享池 INDEX
+    inputs: [inventory.md]
+    outputs: [INDEX_POINTER.md]
+    done_when:
+      - "INDEX_POINTER.md cites team/shared/scout-video-pool/INDEX.md entry"
+    human_gate: false
+    artifacts: [INDEX_POINTER.md]
+
+  - id: cards_config
+    title: 图文卡文案与抽帧时间轴
+    inputs: [inventory.md]
+    outputs: [cards.json]
+    done_when:
+      - "cards.json has cover + >=1 body with t/headline/body"
+      - "no page-index or disclaimer copy in headlines"
+    human_gate: false
+    artifacts: [cards.json]
+
+  - id: repurpose
+    title: 跑分平台拆解脚本
+    inputs: [cards.json]
+    outputs: [pack_manifest.json]
+    done_when:
+      - "ran team/tools/repurpose_scout_video.py"
+      - "pack_manifest.json points to packs/<slug>/"
+    human_gate: false
+    artifacts: [pack_manifest.json]
+
+  - id: qa_dims
+    title: 尺寸与观感自检
+    inputs: [pack_manifest.json]
+    outputs: [QA.md]
+    done_when:
+      - "XHS cards are 1080x1440; Douyin is 1080x1920; Bili cover/landscape noted"
+      - "Read/visual check: CJK fonts OK, no page numbers, no disclaimer microcopy, no dead black letterbox"
+    human_gate: false
+    artifacts: [QA.md]
+
+  - id: handoff
+    title: 交 HANDOFF（SAMPLE≠授发）
+    inputs: [QA.md]
+    outputs: [HANDOFF.md]
+    done_when:
+      - "HANDOFF.md records md5, SAMPLE≠授发, platform paths"
+      - "HANDOFF.md records unique successor and owner, deadline (Asia/Shanghai), reusable steps taught, tutorial or share-video path, per-end diffs, and authorization stop"
+      - "an adapted pack is marked 已交接/待作品 unless the tutorial or share video has landed, or 不适用教程 is documented with a verifiable result"
+    human_gate: false
+    artifacts: [HANDOFF.md]
+
+  - id: deliver
+    title: 交队长/运营取用 · 禁自发
+    inputs: [HANDOFF.md]
+    outputs: [DELIVERED]
+    done_when:
+      - "DELIVERED marker exists"
+      - "no public upload performed"
+    human_gate: true
+    artifacts: [DELIVERED]

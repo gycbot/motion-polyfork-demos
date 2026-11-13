@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GrokGenResults",
+  "type": "object",
+  "required": ["task_id", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": { "type": "string" },
+    "fulfilled_at": { "type": "string" },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "type": "string", "enum": ["ok", "failed", "skipped"] },
+          "path": { "type": "string", "description": "Workspace-relative, usually grok_gen/<id>.png or .mp4" },
+          "error": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
